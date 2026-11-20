@@ -1,8 +1,16 @@
 #include <stdio.h>
 
-int main () {
+int main (void) {
 
-  printf("Hello, World!");
+  char fname[] = "hello-world.txt";
+  char* fmode = "w";
+
+
+  FILE* file_s = fopen(fname, fmode); 
+  fclose(file_s);
+  
+
+  printf("Nothing here yet...\n");
 
   return 0;
 }
