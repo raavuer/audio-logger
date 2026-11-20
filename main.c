@@ -3,8 +3,10 @@
 int main (void) {
 
   char fname[] = "hello-world.txt";
-  char* fmode = "w";
-  char message[] = "Hello, World!\n";
+  char fpathname[] = "./hello-world.txt";
+  char *fmode = "w+";
+  char message[] = "Hello, World!";
+  int msglen = sizeof message;
 
   FILE* file_s;
 
@@ -20,11 +22,24 @@ int main (void) {
     return 1;
   }
 
+  rewind(file_s);
+
+  char response[msglen];
+  if ( fgets(response, msglen, file_s) == NULL ) {
+    printf("File read failed.\n");
+    return 1;
+  }
+  printf("%s\n", response);
+
   if ( fclose(file_s) ) {
     printf("File close failed.\n");
     return 1;
   }
 
+  if ( remove(fpathname) ) {
+    printf("File removal failed. \n");
+    return 1;
+  }
 
   return 0;
 }
